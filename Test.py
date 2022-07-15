@@ -123,7 +123,7 @@
 # f = open(filename, "w")
 # f.truncate()
 # f.close()
-# import pandas as pd
+import pandas as pd
 # import csv
 # df = pd.read_csv('Whitelist.csv')
 # if df.shape[0] != 0:
@@ -132,3 +132,12 @@
 # with open('Whitelist.csv', 'w', encoding='UTF8') as writer_file:
 #     csv_writer = csv.writer(writer_file)
 #     csv_writer.writerow(df)
+import os
+# if os.stat("9123123193851176.csv").st_size == 0:
+# #note: file has to be in same directory as python script#
+#   print('empty')
+if not os.path.exists('9123123193851176.csv'):
+    print('empty')
+# df = pd.read_csv('968473991155179520.csv')
+# if df.shape[0]:
+#     print(df.shape)
