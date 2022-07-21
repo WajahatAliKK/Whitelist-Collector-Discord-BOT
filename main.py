@@ -27,7 +27,7 @@ bot = commands.Bot(
 @bot.slash_command(
     name="reset-wallet-count",
     description="Erases all data of successfully submitted wallets. BE VERY CAREFUL WHEN USING THIS COMMAND",
-    guild_ids=[968473991155179520, 996682296293851176,997393143081226251]
+    guild_ids=[968473991155179520, 996682296293851176, 997393143081226251]
 )
 async def _clearCount(ctx):
     if Modal_test.licenseKey:
@@ -46,7 +46,8 @@ async def _clearCount(ctx):
                 title="Reset successful!",
                 color=discord.Color.blurple())
             embed.add_field(name="✅ Wallet count has been successfully reset to `0` and all data has been erased.",
-                            value="Use the command `/start` to initialize the bot using a different configuration, if any",
+                            value="Use the command `/start` to initialize the bot using a different configuration, "
+                                  "if any",
                             inline=False)
             await ctx.respond(embed=embed, ephemeral=True)
     else:
@@ -182,7 +183,8 @@ async def _heybottie(ctx):
                                     csv_writer.writerows(Updated)
                             else:
                                 embed = discord.Embed(
-                                    title="You have not submitted your wallet address yet. \nPlease click `Add` to submit "
+                                    title="You have not submitted your wallet address yet. \nPlease click `Add` to "
+                                          "submit "
                                           "your wallet address before the deadline.",
                                     color=discord.Color.red())
                                 await interaction.response.send_message(embeds=[embed], ephemeral=True)
@@ -213,7 +215,8 @@ async def _heybottie(ctx):
                                     await interaction.response.send_message(embeds=[embed], ephemeral=True)
                                 else:
                                     embed = discord.Embed(
-                                        title="You have not submitted your wallet address yet. \n Please click `Add` to "
+                                        title="You have not submitted your wallet address yet. \n Please click `Add` "
+                                              "to "
                                               "submit your wallet address before the deadline.",
                                         color=discord.Color.red())
                                     await interaction.response.send_message(embeds=[embed], ephemeral=True)
@@ -230,10 +233,12 @@ async def _heybottie(ctx):
                 button3.callback = button3_callback
                 # if channel.name == 'general':
                 embed = discord.Embed(
-                    title=f"Congratulations! 🎉  If you are seeing this, you are officially accepted to be on our Whitelist!",
+                    title=f"Congratulations! 🎉  If you are seeing this, you are officially accepted to be on our "
+                          f"Whitelist!",
                     color=discord.Color.green())
                 embed.add_field(
-                    name=f"The following are the instructions to officially submit your wallet address that will be used "
+                    name=f"The following are the instructions to officially submit your wallet address that will be "
+                         f"used "
                          f"for minting:",
                     value="\n\n:one: Click __**Add**__ to submit your wallet address\n\n:two: "
                           f"Click __**Check**__ if you would like to check the wallet address "
@@ -282,7 +287,6 @@ async def on_ready():
     data = ["UserName", "Wallet_Address", "User_ID"]
     for guild in bot.guilds:
         fname = str(guild.id) + '.csv'
-        # print(fname)
         if not os.path.exists('9123123193851176.csv'):
             with open(fname, 'w', encoding='UTF8', newline='') as f:
                 writer = csv.writer(f)
@@ -306,13 +310,6 @@ class MyModal(Modal):
             self.add_item(InputText(label="Wallet Address", placeholder="0xGh4351Fe436ds73sa6F06542w13794DD04E59Fde4"))
         else:
             self.add_item(InputText(label="Wallet Address", placeholder="83astBRguLMdt2h5U1Tpdq5tjFoJ6noeWasT3mDLVcri"))
-        # self.add_item(
-        #     InputText(
-        #         label="Long Input",
-        #         value="Default",  # sort of like a default
-        #         style=discord.InputTextStyle.long,  # long/short
-        #     )
-        # )
 
     async def callback(self, interaction: discord.Interaction):
 
@@ -349,7 +346,6 @@ class MyModal(Modal):
                 await interaction.response.send_message(embeds=[embed], ephemeral=True)
                 return
             else:
-                guild_id = 0
                 flag = file_submission(self.guild_id)
                 if flag == 'Done':
                     embed = discord.Embed(
