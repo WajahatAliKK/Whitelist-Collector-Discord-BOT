@@ -79,21 +79,23 @@ async def _count(ctx):
     guild_ids=[968473991155179520, 996682296293851176, 997393143081226251]
 )
 async def _check(ctx):
-    if Modal_test.currency:
-        embed = discord.Embed(title=f"This project's currency is set to `{Modal_test.currency}` and the minimum "
-                                    f"wallet balance required to qualify for submission is `{Modal_test.minimun_balance}`.",
-                              color=discord.Color.blurple())
-        await ctx.respond(
-            embed=embed,
-            ephemeral=True)
-    else:
-        embed = discord.Embed(
-            title="ERROR ❌",
-            color=discord.Color.red())
-        embed.add_field(name='Initiate the bot', value='Buy the license or initiate the license and variables (if you '
-                                                       'already have one) using the `/start` command', inline=False)
-        await ctx.respond(
-            embed=embed, ephemeral=True)
+    for guild in bot.guilds:
+        if guild.id == ctx.guild.id:
+            if Modal_test.currency:
+                embed = discord.Embed(title=f"This project's currency is set to `{Modal_test.currency}` and the minimum "
+                                            f"wallet balance required to qualify for submission is `{Modal_test.minimun_balance}`.",
+                                      color=discord.Color.blurple())
+                await ctx.respond(
+                    embed=embed,
+                    ephemeral=True)
+            else:
+                embed = discord.Embed(
+                    title="ERROR ❌",
+                    color=discord.Color.red())
+                embed.add_field(name='Initiate the bot', value='Buy the license or initiate the license and variables (if you '
+                                                               'already have one) using the `/start` command', inline=False)
+                await ctx.respond(
+                    embed=embed, ephemeral=True)
 
 
 @commands.has_permissions(administrator=True)
@@ -142,10 +144,6 @@ async def _heybottie(ctx):
             if guild.id == ctx.guild.id:
                 for channel in guild.text_channels:  # getting only text channels
                     if channel.permissions_for(guild.me).send_messages:  # checking if you have permissions
-                        # username = str(message.author).split('#')[0]
-                        # Modal_test.user_name = username
-                        # Modal_test.User_ID = message.author.id
-                        # print(message)
                         button = Button(label='Add', style=discord.ButtonStyle.green, emoji='✅')
                         button2 = Button(label='Check', style=discord.ButtonStyle.gray, emoji='☑')
                         button3 = Button(label='Delete', style=discord.ButtonStyle.danger, emoji='✖')
@@ -156,7 +154,6 @@ async def _heybottie(ctx):
                         fname = str(guild.id) + '.csv'
 
                         async def button3_callback(interaction):
-                            print(fname)
                             df = pd.read_csv(fname)
                             Updated = list()
                             Modal_test.User_ID = interaction.user.id
@@ -264,14 +261,16 @@ async def _heybottie(ctx):
     guild_ids=[968473991155179520, 996682296293851176, 997393143081226251]
 )
 async def _download_csv(ctx):
-    data = pd.read_csv("Whitelist.csv")
-    if data.shape[0] == 0:
-        embed = discord.Embed(title="ERROR ❌",
-                              color=discord.Color.red())
-        embed.add_field(name="There is no wallet address submitted yet", value=f"0️⃣", inline=False)
-        await ctx.respond(embed=embed, ephemeral=True)
-    else:
-        await ctx.respond(file=discord.File("Whitelist.csv"), ephemeral=True)
+    for guild in bot.guilds:
+        if guild.id == ctx.guild.id:
+            data = pd.read_csv(str(guild.id) + '.csv')
+            if data.shape[0] == 0:
+                embed = discord.Embed(title="ERROR ❌",
+                                      color=discord.Color.red())
+                embed.add_field(name="There is no wallet address submitted yet", value=f"0️⃣", inline=False)
+                await ctx.respond(embed=embed, ephemeral=True)
+            else:
+                await ctx.respond(file=discord.File(str(guild.id) + '.csv'), ephemeral=True)
 
 
 # bot = discord.Client(intents=discord.Intents.default())
