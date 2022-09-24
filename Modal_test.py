@@ -4,8 +4,8 @@ User_ID = 0
 valid_wallet = False
 balance = 0
 licenseKey = False
-currency = ''
-minimun_balance = 0.0
+currency = []
+minimun_balance = []
 
 
 # function Main(paramet)

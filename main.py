@@ -31,25 +31,28 @@ bot = commands.Bot(
 )
 async def _clearCount(ctx):
     if Modal_test.licenseKey:
-        df = pd.read_csv("Whitelist.csv")
-        if df.shape[0] == 0:
-            embed = discord.Embed(
-                title=f"Total number of submitted wallets is `{df.shape[0]}`",
-                color=discord.Color.blurple())
-            await ctx.respond(embed=embed, ephemeral=True)
-        else:
-            df = df.truncate(df.shape[0])
-            with open('Whitelist.csv', 'w', encoding='UTF8') as writer_file:
-                csv_writer = csv.writer(writer_file)
-                csv_writer.writerow(df)
-            embed = discord.Embed(
-                title="Reset successful!",
-                color=discord.Color.blurple())
-            embed.add_field(name="✅ Wallet count has been successfully reset to `0` and all data has been erased.",
-                            value="Use the command `/start` to initialize the bot using a different configuration, "
-                                  "if any",
-                            inline=False)
-            await ctx.respond(embed=embed, ephemeral=True)
+        for guild in bot.guilds:
+            if guild.id == ctx.guild.id:
+                df = pd.read_csv(str(guild.id) + '.csv')
+        # df = pd.read_csv("Whitelist.csv")
+                if df.shape[0] == 0:
+                    embed = discord.Embed(
+                        title=f"Total number of submitted wallets is `{df.shape[0]}`",
+                        color=discord.Color.blurple())
+                    await ctx.respond(embed=embed, ephemeral=True)
+                else:
+                    df = df.truncate(df.shape[0])
+                    with open(str(guild.id) + '.csv', 'w', encoding='UTF8') as writer_file:
+                        csv_writer = csv.writer(writer_file)
+                        csv_writer.writerow(df)
+                    embed = discord.Embed(
+                        title="Reset successful!",
+                        color=discord.Color.blurple())
+                    embed.add_field(name="✅ Wallet count has been successfully reset to `0` and all data has been erased.",
+                                    value="Use the command `/start` to initialize the bot using a different configuration, "
+                                          "if any",
+                                    inline=False)
+                    await ctx.respond(embed=embed, ephemeral=True)
     else:
         embed = discord.Embed(title=f"ERROR ❌ ",
                               color=discord.Color.red())
@@ -65,10 +68,13 @@ async def _clearCount(ctx):
     guild_ids=[968473991155179520, 996682296293851176, 997393143081226251]
 )
 async def _count(ctx):
-    data = pd.read_csv("Whitelist.csv")
-    embed = discord.Embed(
-        title=f"Total number of successfully submitted wallets is `{data.shape[0]}`",
-        color=discord.Color.blurple())
+    for guild in bot.guilds:
+        if guild.id == ctx.guild.id:
+            data = pd.read_csv(str(guild.id) + '.csv')
+            # data = pd.read_csv("Whitelist.csv")
+            embed = discord.Embed(
+                title=f"Total number of successfully submitted wallets is `{data.shape[0]}`",
+                color=discord.Color.blurple())
     await ctx.respond(embed=embed, ephemeral=True)
 
 
@@ -284,9 +290,10 @@ async def _download_csv(ctx):
 async def on_ready():
     print('We have logged in as {0.user}'.format(bot))
     data = ["UserName", "Wallet_Address", "User_ID"]
+    df = pd.read_csv('License.csv')
     for guild in bot.guilds:
         fname = str(guild.id) + '.csv'
-        if not os.path.exists('9123123193851176.csv'):
+        if not os.path.exists(fname):
             with open(fname, 'w', encoding='UTF8', newline='') as f:
                 writer = csv.writer(f)
                 writer.writerow(data)
