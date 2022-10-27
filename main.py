@@ -10,13 +10,11 @@ from web3 import Web3
 from discord.commands import Option
 
 w3 = Web3(Web3.HTTPProvider('https://mainnet.infura.io/v3/75b18ca4eac342e19386ca121d13eda8'))
-# TOKEN = 'OTczOTIxNjE5ODI1Mjc5MDE3.GRWJzL.eOvClJNIu7WiBjD2ALpbD3oMNwlytCdjAIF9SI'
-TOKEN = 'OTY4NDY3OTkwNTQwNTk1MjMw.GEbbW0.rryf7tQC7OCD6t_WH6LECBob7OU23LiV57_MIQ'
+TOKEN = ''
 http_client = Client("https://api.mainnet-beta.solana.com")
 sol = http_client.get_balance("83astBRguLMdt2h5U1Tpdq5tjFoJ6noeGwaY3mDLVcri")
 sol = sol['result']['value']
 print(sol * 0.000000001)
-# DTOKEN = 'Z4-JXA6cFJpjFS0EFp4BQSnmoEa_HuqY'
 bot = commands.Bot(
     command_prefix='>>>',
     intents=discord.Intents(messages=True, guilds=True)
