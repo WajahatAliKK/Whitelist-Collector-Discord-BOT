@@ -1,10 +1,28 @@
-import dateutil.parser
-from datetime import datetime
-time_str = ['Tue, 01 Mar 2016 21:17:00 +0800', '2016/03/01 21:17:00', '21:17:00 2016/03/01', '01/03/2016 21:17:00']
-for t in time_str:
-    d = dateutil.parser.parse(t)
-    print(type(d))
-    print(d.strftime('%d/%m/%Y'))
+import csv
+import json
+from avro.codecs import NullCodec
+# from avro.datafile import DataFileReader, DataFileWriter
+# from avro.io import DatumReader, DatumWriter
+#
+# # read the Avro file and deserialization
+# reader = DataFileReader(open("userdata1.avro", "rb"), DatumReader())
+# for employee in reader:
+#     print(employee)
+# reader.close
+#
+# # print the Avro schema
+# reader = avro.datafile.DataFileReader(open('user.avro', "rb"), avro.io.DatumReader())
+# records = [r for r in reader]
+# schema = reader.meta
+# print(schema)
+
+# import dateutil.parser
+# from datetime import datetime
+# time_str = ['Tue, 01 Mar 2016 21:17:00 +0800', '2016/03/01 21:17:00', '21:17:00 2016/03/01', '01/03/2016 21:17:00']
+# for t in time_str:
+#     d = dateutil.parser.parse(t)
+#     print(type(d))
+#     print(d.strftime('%d/%m/%Y'))
 # import pandas as pd
 # data = pd.read_csv("Whitelist.csv")
 # print(data.shape[0])
@@ -32,7 +50,7 @@ for t in time_str:
 #
 # TOKEN = 'OTY4NDY3OTkwNTQwNTk1MjMw.GEbbW0.rryf7tQC7OCD6t_WH6LECBob7OU23LiV57_MIQ'
 #
-   # client = discord.Client(intents=discord.Intents.default())
+# client = discord.Client(intents=discord.Intents.default())
 #
 # # bot = commands.Bot(intents=discord.Intents.default(),command_prefix='..')
 #
@@ -159,7 +177,7 @@ import pandas as pd
 #     writer.writerow(row)
 # in_file.close()
 # out_file.close()
-df = pd.read_csv('License.csv')
-
-print(df.shape)
-print(df)
+# df = pd.read_csv('License.csv')
+#
+# print(df.shape)
+# print(df)
