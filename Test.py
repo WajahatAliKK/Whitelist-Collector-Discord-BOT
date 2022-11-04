@@ -48,7 +48,7 @@ from avro.codecs import NullCodec
 #
 #
 #
-# TOKEN = 'OTY4NDY3OTkwNTQwNTk1MjMw.GEbbW0.rryf7tQC7OCD6t_WH6LECBob7OU23LiV57_MIQ'
+# TOKEN = ''
 #
 # client = discord.Client(intents=discord.Intents.default())
 #
@@ -140,7 +140,7 @@ from avro.codecs import NullCodec
 #     await ctx.channel.purge(limit=amount)
 #
 #
-# client.run('OTczOTIxNjE5ODI1Mjc5MDE3.GRWJzL.eOvClJNIu7WiBjD2ALpbD3oMNwlytCdjAIF9SI')
+# client.run('')
 
 
 # filename = "Whitelist.csv"
